@@ -1,0 +1,17 @@
+name: Trigger QA Tests
+
+on:
+  push:
+    branches:
+      - qa
+
+jobs:
+  notify-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger QA E2E workflow
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT_QA_E2E }}
+          repository: pmiti/qa-e2e
+          event-type: run-tests
